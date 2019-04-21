@@ -30,9 +30,19 @@ $("#addButton").on("click", function (e) {
         }).then(function (response) {
             console.log(response);
 
+            var movieGif = response.data[0].images.original_still.url;
+            console.log(movieGif);
+
+            $(".giphDisplay").prepend(`<img src=${movieGif}>`);
+
+
         });
 
 
     });
 
 });
+
+/* <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif"
+    data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif"
+    data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif"> */
