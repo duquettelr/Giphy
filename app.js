@@ -20,17 +20,18 @@ $("#addButton").on("click", function (e) {
     // $(".buttonDisplay").empty();
 
     if (movieInput !== "") {
-        $(".buttonDisplay").append(`<button class="movieButton${index}">${movieInput}</button>`);
+        $(".buttonDisplay").append(`<button class="movieButton" value="${movieInput}">${movieInput}</button>`);
     }
 
 
 
     //document on click
 
+    $('.movieButton').unbind('click');
 
-    $(`.movieButton${index}`).on("click", function (e) {
+    $(`.movieButton`).on("click", function (e) {
 
-        var movieGifSearch = $(this).text();
+        var movieGifSearch = $(this).attr("value");
 
 
         console.log(movieGifSearch);
@@ -49,7 +50,7 @@ $("#addButton").on("click", function (e) {
 
             var movieGifStill = response.data[0].images.original_still.url;
 
-            $(".giphDisplay").prepend(`<img src=${movieGif}>`);
+            $(".giphDisplay").prepend(`<img src=${movieGif} class="movieGif" data-animate=${movieGif} data-still=${movieGifStill} data-state="animate">`);
 
             //add still and animate states (original url vs original_still url)
             //push your created buttons into an array
@@ -58,16 +59,29 @@ $("#addButton").on("click", function (e) {
 
         });
 
+        $('.movieGif').unbind('click');
+
+
+        $(`.movieGif`).on("click", function () {
+
+            var state = $(this).attr("data-state");
+
+            if (state === "still") {
+                var animateSrc = $(this).attr("data-animate");
+                $(this).attr("src", animateSrc);
+                $(this).attr("data-state", "animate");
+            } else {
+                var stillSrc = $(this).attr("data-still");
+                $(this).attr("src", stillSrc);
+                $(this).attr("data-state", "still");
+            }
+
+
+        });
 
 
     });
 
-    index++;
-
-
 
 });
 
-/* <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif"
-    data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif"
-    data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif"> */
