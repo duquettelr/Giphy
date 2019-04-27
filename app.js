@@ -1,10 +1,5 @@
-//set variable equal to user input
-//create button element with upser input
-//append button element to screen in first container
+///issues with unbinding onclicks
 
-
-
-//questions: why is my push function overwriting my array?
 var index = 0;
 var movies = ["Back to the Future", "Sixteen Candles", "Dirty Dancing", "Ghost Busters", "The Breakfast Club"];
 
@@ -39,27 +34,29 @@ $(`.movieButton`).on("click", function (e) {
 
         $(".giphDisplay").prepend(`<img src=${movieGif} class="movieGif" data-animate=${movieGif} data-still=${movieGifStill} data-state="animate">`);
 
+        $('.movieGif').unbind('click');
+
+        $(`.movieGif`).on("click", function () {
+
+            var state = $(this).attr("data-state");
+
+            if (state === "still") {
+                var animateSrc = $(this).attr("data-animate");
+                $(this).attr("src", animateSrc);
+                $(this).attr("data-state", "animate");
+            } else {
+                var stillSrc = $(this).attr("data-still");
+                $(this).attr("src", stillSrc);
+                $(this).attr("data-state", "still");
+            }
+
+
+        });
+
 
     });
 
-    $('.movieGif').unbind('click');
 
-    $(`.movieGif`).on("click", function () {
-
-        var state = $(this).attr("data-state");
-
-        if (state === "still") {
-            var animateSrc = $(this).attr("data-animate");
-            $(this).attr("src", animateSrc);
-            $(this).attr("data-state", "animate");
-        } else {
-            var stillSrc = $(this).attr("data-still");
-            $(this).attr("src", stillSrc);
-            $(this).attr("data-state", "still");
-        }
-
-
-    });
 
 
 });
@@ -108,26 +105,28 @@ $("#addButton").on("click", function (e) {
             $(".giphDisplay").prepend(`<img src=${movieGif} class="movieGif" data-animate=${movieGif} data-still=${movieGifStill} data-state="animate">`);
 
 
+            $(`.movieGif`).on("click", function () {
+
+                var state = $(this).attr("data-state");
+
+                if (state === "still") {
+                    var animateSrc = $(this).attr("data-animate");
+                    $(this).attr("src", animateSrc);
+                    $(this).attr("data-state", "animate");
+                } else {
+                    var stillSrc = $(this).attr("data-still");
+                    $(this).attr("src", stillSrc);
+                    $(this).attr("data-state", "still");
+                }
+
+
+            });
+
+
+
         });
 
 
-
-        $(`.movieGif`).on("click", function () {
-
-            var state = $(this).attr("data-state");
-
-            if (state === "still") {
-                var animateSrc = $(this).attr("data-animate");
-                $(this).attr("src", animateSrc);
-                $(this).attr("data-state", "animate");
-            } else {
-                var stillSrc = $(this).attr("data-still");
-                $(this).attr("src", stillSrc);
-                $(this).attr("data-state", "still");
-            }
-
-
-        });
 
 
     });
