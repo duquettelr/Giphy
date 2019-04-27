@@ -6,7 +6,7 @@
 
 //questions: why is my push function overwriting my array?
 var index = 0;
-var movies = ["Back to the future", "Sixteen Candles", "Dirty Dancing", "Ghost Busters", "The Breakfast Club"];
+var movies = ["Back to the Future", "Sixteen Candles", "Dirty Dancing", "Ghost Busters", "The Breakfast Club"];
 
 function createMovieButtons(buttonName) {
     $(".buttonDisplay").append(`<button class="movieButton" value="${buttonName}">${buttonName}</button>`);
@@ -42,7 +42,7 @@ $(`.movieButton`).on("click", function (e) {
 
     });
 
-
+    $('.movieGif').unbind('click');
 
     $(`.movieGif`).on("click", function () {
 
