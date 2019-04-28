@@ -104,6 +104,7 @@ $("#addButton").on("click", function (e) {
 
             $(".giphDisplay").prepend(`<img src=${movieGif} class="movieGif" data-animate=${movieGif} data-still=${movieGifStill} data-state="animate">`);
 
+            $('.movieGif').unbind('click');
 
             $(`.movieGif`).on("click", function () {
 
